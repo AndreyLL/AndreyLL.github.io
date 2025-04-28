@@ -1,0 +1,342 @@
+/* Базовые стили и адаптивность */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdfaf6;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #e8a1a1; /* Нежно-розовый */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; /* Делаем шапку "липкой" */
+    top: 0;
+    z-index: 1000; /* Чтобы была поверх контента */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.cart-icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    position: relative; /* Для позиционирования счетчика */
+}
+
+#cart-count {
+    background-color: #d84343; /* Красный для акцента */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    position: absolute; /* Позиционируем счетчик */
+    top: -5px;
+    right: -10px;
+}
+
+
+#page-container {
+    padding: 20px;
+    flex-grow: 1; /* Занимает все доступное пространство */
+}
+
+.page {
+    display: none; /* Все страницы по умолчанию скрыты */
+}
+
+.page.active {
+    display: block; /* Показываем только активную */
+}
+
+/* Стили каталога */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Адаптивная сетка */
+    gap: 20px; /* Отступ между карточками */
+    margin-bottom: 20px;
+}
+
+.product-card {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease; /* Плавное увеличение при наведении */
+}
+
+.product-card:hover {
+     transform: scale(1.03); /* Немного увеличить */
+}
+
+
+.product-card img {
+    max-width: 100%;
+    height: 120px; /* Фикс высота для единообразия */
+    object-fit: cover; /* Масштабирование с сохранением пропорций */
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    font-size: 1em;
+    margin: 10px 0 5px;
+}
+
+.product-card p {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.product-card .price {
+    font-weight: bold;
+    color: #333;
+}
+
+.product-card button, .nav-button {
+    background-color: #d84343;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.product-card button:hover, .nav-button:hover {
+    background-color: #b83333;
+}
+
+.nav-button {
+    display: inline-block; /* Чтобы кнопки не занимали всю ширину */
+    margin-top: 15px;
+    margin-right: 10px; /* Отступ между кнопками */
+}
+
+/* Стили корзины */
+#cart-items {
+    margin-bottom: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item span {
+    flex-basis: 30%; /* Распределяем место */
+}
+.cart-item span:first-child { flex-basis: 40%; } /* Больше места для названия */
+
+.cart-item button {
+    background-color: #aaa;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.cart-item button:hover {
+     background-color: #888;
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.cart-buttons, .checkout-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between; /* Размещаем кнопки по краям */
+    flex-wrap: wrap; /* Перенос кнопок на новую строку на мал. экранах */
+    gap: 10px;
+}
+
+.checkout-button {
+    background-color: #5cb85c; /* Зеленый для оформления */
+}
+.checkout-button:hover {
+    background-color: #4cae4c;
+}
+
+/* Стили формы оформления */
+#checkout-form .form-group {
+    margin-bottom: 15px;
+}
+
+#checkout-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#checkout-form input[type="text"],
+#checkout-form input[type="tel"],
+#checkout-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Учитывать padding и border в ширине */
+}
+
+#checkout-form textarea {
+    resize: vertical; /* Разрешить изменять высоту */
+}
+
+/* Стили страницы подтверждения */
+#confirmation-page {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px; /* Небольшой отступ сверху */
+    background-color: #f0f0f0;
+    color: #777;
+    font-size: 0.9em;
+}
+
+/* Очень простая медиа-заявка для чуть больших экранов */
+@media (min-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    #page-container {
+        padding: 30px 40px;
+    }
+}
+/* --- Стили для новых страниц и элементов --- */
+
+/* Навигация пользователя в шапке */
+#user-nav button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    margin-left: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+#user-nav button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Стили для форм входа/регистрации */
+#login-form, #register-form, #courier-login-form {
+    max-width: 400px; /* Ограничиваем ширину формы */
+    margin: 20px auto; /* Центрируем форму */
+    padding: 25px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"],
+.form-group input[type="tel"] {
+     width: 100%;
+     padding: 10px;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     box-sizing: border-box;
+     font-size: 1em;
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Для переноса на моб */
+    gap: 10px; /* Расстояние между кнопками */
+    justify-content: space-between; /* Распределяем кнопки */
+}
+
+/* Кнопка-ссылка */
+.link-button {
+    background-color: transparent;
+    color: #d84343;
+    padding: 10px 0; /* Убираем лишний padding */
+    text-decoration: underline; /* Делаем похожей на ссылку */
+}
+.link-button:hover {
+    background-color: transparent;
+    color: #b83333;
+    text-decoration: none;
+}
+
+
+/* Стили для личного кабинета и дашборда курьера */
+#account-page h3, #courier-dashboard-page h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.order-history-item, .assigned-order-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.order-history-item p, .assigned-order-item p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+.order-history-item strong, .assigned-order-item strong {
+     color: #333;
+}
+
+.assigned-order-item button {
+    margin-top: 10px;
+    margin-right: 5px;
+    font-size: 0.85em;
+    padding: 6px 10px;
+}
+/* Добавим цвет кнопкам статуса курьера */
+.status-button-inprogress { background-color: #f0ad4e; } /* Оранжевый */
+.status-button-delivered { background-color: #5cb85c; } /* Зеленый */
+.status-button-inprogress:hover { background-color: #ec971f; }
+.status-button-delivered:hover { background-color: #4cae4c; }

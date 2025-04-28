@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цветы с доставкой - Демо</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Маленькие радости</h1>
+        <nav id="user-nav">
+             </nav>
+        <div class="cart-icon" onclick="showPage('cart-page')">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main id="page-container">
+
+        <section id="catalog-page" class="page active">
+            <h2>Выберите цветы</h2>
+            <div class="product-grid">
+                <div class="product-card"> <img src="https://via.placeholder.com/150/f8a7a7/ffffff?text=Роза" alt="Роза"> <h3>Роза красная</h3> <p>Цена: <span class="price">150</span> грн</p> <button onclick="addToCart('rose_red', 'Роза красная', 150)">В корзину</button> </div>
+                <div class="product-card"> <img src="https://via.placeholder.com/150/f8f8a7/ffffff?text=Тюльпан" alt="Тюльпан"> <h3>Тюльпан желтый</h3> <p>Цена: <span class="price">90</span> грн</p> <button onclick="addToCart('tulip_yellow', 'Тюльпан желтый', 90)">В корзину</button> </div>
+                <div class="product-card"> <img src="https://via.placeholder.com/150/a7c7f8/ffffff?text=Букет" alt="Мини-букет"> <h3>Мини-букет "Нежность"</h3> <p>Цена: <span class="price">450</span> грн</p> <button onclick="addToCart('bouquet_tender', 'Мини-букет Нежность', 450)">В корзину</button> </div>
+                <div class="product-card"> <img src="https://via.placeholder.com/150/b7f8a7/ffffff?text=Хризантема" alt="Хризантема"> <h3>Хризантема белая (ветка)</h3> <p>Цена: <span class="price">120</span> грн</p> <button onclick="addToCart('chrys_white', 'Хризантема белая', 120)">В корзину</button> </div>
+            </div>
+             <button class="nav-button" onclick="showPage('cart-page')">Перейти в корзину</button>
+        </section>
+
+        <section id="cart-page" class="page">
+             <h2>Ваша корзина</h2> <div id="cart-items"> <p>Корзина пуста.</p> </div> <div class="cart-total"> <strong>Итого: <span id="cart-total">0</span> грн</strong> </div> <div class="cart-buttons"> <button class="nav-button" onclick="showPage('catalog-page')">Вернуться к выбору</button> <button class="nav-button checkout-button" onclick="showPage('checkout-page')">Оформить заказ</button> </div>
+        </section>
+
+        <section id="checkout-page" class="page">
+            <h2>Оформление заказа</h2> <form id="checkout-form" onsubmit="event.preventDefault(); submitOrder();"> <div class="form-group"> <label for="recipient-name">Имя получателя:</label> <input type="text" id="recipient-name" required> </div> <div class="form-group"> <label for="recipient-phone">Телефон получателя:</label> <input type="tel" id="recipient-phone" required> </div> <div class="form-group"> <label for="delivery-address">Адрес доставки:</label> <textarea id="delivery-address" rows="3" required></textarea> </div> <div class="form-group"> <label for="delivery-comment">Комментарий курьеру (необязательно):</label> <input type="text" id="delivery-comment"> </div> <p><strong>К оплате: <span id="checkout-total">0</span> грн</strong></p> <p><small>Оплата будет доступна после подтверждения (в этой демо-версии оплата не реализована).</small></p> <div class="checkout-buttons"> <button class="nav-button" type="button" onclick="showPage('cart-page')">Назад в корзину</button> <button class="nav-button checkout-button" type="submit">Подтвердить заказ</button> </div> </form>
+        </section>
+
+        <section id="confirmation-page" class="page">
+             <h2>Спасибо за ваш заказ!</h2> <p>Ваш заказ <strong id="order-number">#12345</strong> принят.</p> <p>Мы свяжемся с вами для подтверждения деталей или курьер позвонит по прибытии.</p> <p>Ожидаемая доставка в течение 90 минут (в этой демо-версии время примерное).</p> <button class="nav-button" onclick="showPage('catalog-page'); clearCartOnConfirmation();">Вернуться в магазин</button>
+        </section>
+
+        <section id="login-page" class="page">
+            <h2>Вход для клиента</h2>
+            <form id="login-form" onsubmit="event.preventDefault(); handleLogin();">
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" value="test@example.com" required> </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль:</label>
+                    <input type="password" id="login-password" value="password" required> </div>
+                <div class="form-actions">
+                     <button type="submit" class="nav-button checkout-button">Войти</button>
+                     <button type="button" class="nav-button link-button" onclick="showPage('register-page')">Регистрация</button>
+                     <button type="button" class="nav-button link-button" onclick="showPage('courier-login-page')">Вход для курьера</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="register-page" class="page">
+            <h2>Регистрация клиента</h2>
+            <form id="register-form" onsubmit="event.preventDefault(); handleRegister();">
+                 <div class="form-group">
+                    <label for="register-name">Имя:</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                 <div class="form-group">
+                    <label for="register-phone">Телефон:</label>
+                    <input type="tel" id="register-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль:</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                 <div class="form-actions">
+                    <button type="submit" class="nav-button checkout-button">Зарегистрироваться</button>
+                    <button type="button" class="nav-button link-button" onclick="showPage('login-page')">Уже есть аккаунт? Войти</button>
+                 </div>
+            </form>
+        </section>
+
+         <section id="account-page" class="page">
+            <h2>Личный кабинет</h2>
+            <p>Добро пожаловать, <strong id="user-name-display">Клиент</strong>!</p>
+            <h3>История ваших заказов (Демо)</h3>
+            <div id="order-history">
+                 <p>Загрузка истории...</p>
+            </div>
+            <button class="nav-button" onclick="handleLogout()">Выйти</button>
+        </section>
+
+        <section id="courier-login-page" class="page">
+            <h2>Вход для курьера</h2>
+             <form id="courier-login-form" onsubmit="event.preventDefault(); handleCourierLogin();">
+                <div class="form-group">
+                    <label for="courier-id">Логин курьера:</label>
+                    <input type="text" id="courier-id" value="courier1" required> </div>
+                <div class="form-group">
+                    <label for="courier-password">Пароль:</label>
+                    <input type="password" id="courier-password" value="pass123" required> </div>
+                 <div class="form-actions">
+                    <button type="submit" class="nav-button checkout-button">Войти</button>
+                    <button type="button" class="nav-button link-button" onclick="showPage('login-page')">Вход для клиента</button>
+                 </div>
+            </form>
+        </section>
+
+        <section id="courier-dashboard-page" class="page">
+             <h2>Панель курьера</h2>
+             <p>Курьер: <strong id="courier-id-display">Имя курьера</strong></p>
+             <h3>Назначенные заказы (Демо)</h3>
+             <div id="assigned-orders">
+                 <p>Загрузка заказов...</p>
+             </div>
+              <button class="nav-button" onclick="handleLogout()">Выйти</button>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2025 Маленькие радости</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
